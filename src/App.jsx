@@ -1,27 +1,13 @@
-import { useState } from "react";
-import ProductSelection from "./components/ProductSelection";
-import ProblemSelection from "./components/ProblemSelection";
-import { serviceData } from "./data/serviceData";
+import { Routes, Route } from "react-router-dom";
+import ServiceApp from "./components/ServiceApp";
 
 function App() {
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  const resetAll = () => setSelectedProduct(null);
-
-  const problems = selectedProduct ? serviceData[selectedProduct] : null;
-
   return (
-    <div>
-      {!selectedProduct ? (
-        <ProductSelection onSelect={setSelectedProduct} />
-      ) : (
-        <ProblemSelection
-          product={selectedProduct}
-          problems={problems}
-          onBack={resetAll}
-        />
-      )}
-    </div>
+    <Routes>
+      <Route path="/" element={<ServiceApp />} />
+      <Route path="/:product" element={<ServiceApp />} />
+      <Route path="/:product/:problem" element={<ServiceApp />} />
+    </Routes>
   );
 }
 
